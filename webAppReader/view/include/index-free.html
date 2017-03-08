@@ -1,0 +1,37 @@
+
+<section class="channel-free">
+	<div class="channel-free-header">
+		<h2 class="channel-free-title">限时免费</h2>
+	</div>
+	
+	<ul class="book-free-table">
+		<li v-for="item in free" v-if=" $index==0">
+			<div class="book-free">
+				<div class="book-free-cover">
+					<img  alt="{{item.ad_name}}" v-bind:src="item.data.cover">
+					<div class="cover-tabRight -freefiction"></div>
+					
+				</div>
+				
+				<div class="book-free-info">
+					<h3 class="book-free-info-title">{{item.ad_name}}</h3>
+				</div>
+			</div>
+		</li>
+		<li v-for="item in free" v-if="$index>0 && $index<9">
+			<div class="book-free">
+				<div class="book-free-cover">
+					<img  alt="{{item.title}}" v-bind:src="item.data.cover">
+					<div class="cover-tabRight -freefiction"></div>
+					
+				</div>
+				
+				<div class="book-free-info">
+					<h3 class="book-free-info-title">{{item.ad_name}}</h3>
+				</div>
+			</div>
+		</li>
+		
+	</ul>
+	<a class="channel-free-more" href="/free">更多限免佳作&gt&gt</a>
+</section>

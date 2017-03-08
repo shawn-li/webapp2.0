@@ -1,0 +1,46 @@
+
+<section class="channel">
+	<div class="channel-header">
+		<p class="channel-header-title">女生最爱</p>
+	</div>
+	<div>
+	<div>
+		<ul class="channel-list">
+			<li v-for="item in female" v-if=" $index == 0">
+				<div class="channel-book">
+					<div class="book-cover">
+						<img  alt="{{item.title}}" v-bind:src="item.cover">
+						<p class="book-isfinish">完结</p>
+					</div>
+					<div class="book-content">
+						<p class="book-content-title">{{item.title}}</p>
+						<p class="book-content-author">{{item.authors}}</p>
+						<p class="book-content-summary">{{item.summary}}</p>
+						<div class="book-content-wrap-tag">
+							<div class="book-content-tag" v-for="tag in item.tags">
+								{{tag}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li v-for="item in female" v-if="$index>0 && $index<9">
+				<div class="channel-book book-noimg">
+					<span class="book-noimg-order">0{{ $index }}</span>
+					<div class="book-noimg-info">
+						<p class="book-noimg-info-title">{{ item.title}}</p>
+						<!-- <p class="book-noimg-info-author"></p>
+						<p class="book-noimg-info-summary"></p> -->
+					</div>
+				</div>
+			</li>
+			
+		</ul>
+	</div>
+
+	<div class="channel-book-footer">
+		<a href="javascript:">换一换</a>
+		<a href="javascript:">男生频道</a>
+	</div>
+	</div>
+</section>
