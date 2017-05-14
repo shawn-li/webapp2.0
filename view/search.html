@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">  <!-- 不识别数字为电话 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/all.css"/>
+	<title><%=title%></title>
+	<style type="text/css">
+		@media screen and (min-width:1000px){
+			.search-prompt-list .search-prompt-item:hover{
+				cursor: pointer;
+				color: #ff6600;
+			}
+			.search-top-right:hover{
+				cursor: pointer;
+			}
+			.search-list .search-result:hover{
+				border: 1px solid #ff6600;
+			}
+			
+		}
+		#app{
+			margin: 0 auto;
+		}
+		.search-top-wrap{
+			position: relative;
+			background-color: #efeff0;
+			height: 50px;
+		}
+		.search-top{
+			position: absolute;
+			top: 5px;
+			left: 1%;
+			width: 98%;
+			border: 1px solid #bbb;
+			height: 40px;
+			background-color:#fff;
+		}
+		.search-top-left{
+			
+			float: left;
+			height: 40px;
+			width: 40px;
+			background: url(http://image.read.duokan.com/mfsv2/download/s010/p01TjruXIhgt/PP13pEqhpChuay.png) no-repeat center;
+			background-size: 20px;
+			border-right: 1px solid  #bbb;
+		}
+		.search-input{
+			background-color: #fff;
+		    height: 40px;
+		    font: 18px/39px a;
+		    outline: none;
+		    vertical-align: top;
+		    border: 1px solid #bbb;
+		    border-left: none;
+		    border-right: none;
+		    margin-left: 5px;
+		    margin-top: -1px;
+		    padding-left: 10px;
+			/*background-color: #fff;
+			height: 40px;
+			font:18px/40px a;
+			outline: none;
+			vertical-align: top;
+			border: none;
+			padding-left: 10px;*/
+		}
+		.search-top-right{
+			float: right;
+			border-left: 1px solid #bbb;
+			vertical-align: top;
+			height: 40px;
+			font: 16px/40px a;
+			padding: 0px 10px;
+		}
+		.search-list li{
+			margin-bottom: 10px;
+		}
+		.search-result{
+			/*border: 1px solid #bbb;*/
+			padding: 10px;
+			overflow:hidden;
+			border: 1px solid #fff;
+		}
+		.search-result p{
+			font:16px/20px a;
+			color: rgba(0,0,0,0.8);
+			margin-bottom: 10px;
+			overflow:hidden;
+			display: -webkit-box;
+		    -webkit-line-clamp: 1;
+		    text-overflow: ellipsis;
+		    -webkit-box-orient: vertical;
+		}
+		.search-result p:first-child{
+			font:16px/20px a;
+			color: #000;
+			margin-bottom: 10px;
+			font-weight: 600;
+
+		}
+		.search-result p:last-child{
+			overflow:hidden;
+			display: -webkit-box;
+		    -webkit-line-clamp: 3;
+		    text-overflow: ellipsis;
+		    -webkit-box-orient: vertical;
+		}
+		
+		.search-empty{
+			margin: 10px 10px;
+		}
+
+		.search-bottom-wrap{
+			position: relative;
+		}
+		.search-prompt{
+			position: absolute;
+			top: 0px;
+			background-color: #efeff0;
+			/*border: 1px solid #000;*/
+		}
+		.search-prompt-item{
+			font:16px/20px a;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+	
+	</style>
+</head>
+<body>
+	<div id="app" style="width: {{screen_width}}px;">
+		<% include include/common-header.html %>
+		<div class="search-top-wrap">
+			<div class="search-top">
+				<a href="javascript:">
+					<div class="search-top-left"></div>
+				</a>
+				<input class="search-input" id="search_box" v-on:keyup="getKey" style="width: {{screen_width-130}}px;"></input>
+				<div class="search-top-right" id="search_btn" v-on:click="doSearch">搜索</div>
+			</div>		
+		</div>
+		<div class="search-bottom-wrap">
+			<div class="search-result"  v-show="condition">
+				<p>搜索结果</p>
+				<ul  class="search-list">
+					<li v-for="item in search">
+						<div class="search-result">
+							<a href="/book?id={{ item.id }}">
+								<div class="book-cover">
+									<img alt="{{item.title}}" v-bind:src="item.cover">
+									<!-- <p class="book-isfinish">完结</p> -->
+								</div>
+								<div class="book-content" style="width: {{screen_width-140}}px;">
+									<p class="search-info">{{ item.title }}</p>
+									<p class="search-info">书籍:{{ item.title }}</p>
+									<p class="search-info">简介:{{ item.intro }}</p>
+
+								</div>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="search-prompt" id="search_prompt" v-show="!search_done" style="left: {{screen_width*0.01 +41}}px;width: {{screen_width*0.98-94}}px;display: none;">
+				<ul class="search-prompt-list">
+					<li v-for="item in prompt" v-if="$index <10"  v-on:click='clickPrompt'>
+						<div class="search-prompt-item">
+						{{ item.title }}
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="search-empty" v-show="empty">
+				<div>
+					<p class="u-tip">没有相应的搜索结果</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<script src="/static/scripts/vue.js"></script>
+	<script src="/static/scripts/zepto.js"></script>
+	<script src="/static/scripts/pages/search.js"></script>
+</body>
+</html>

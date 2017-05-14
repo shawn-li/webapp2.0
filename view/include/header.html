@@ -1,0 +1,11 @@
+
+<div class="header-tab" id="app_header">
+	<div class="Switch-tab Switch-tab2 f-clear">
+		<a href="javascript:" v-on:click="tabSwitch(0)" class="{{tab_1_class}}"></a>
+		<a class="js-tab-2" href="javascript:" v-on:click="tabSwitch(1)" class="{{tab_2_class}}"></a>
+		<i class="js-header-tab" style="width={{index_header_tab_width}}px;transition-duration: {{header_duration}}s;transform: translate3d({{header_position}}px,0px,0px);"></i> <!-- js要操作的属性 尽量写在style里面 -->
+	</div>
+	
+	<em class="header-user"></em>
+	<em class="header-checkin"></em>
+</div>

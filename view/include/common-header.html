@@ -1,0 +1,38 @@
+<style type="text/css">
+	.top{
+		position: relative;
+		height: 44px;
+		border-bottom: 1px solid #ddd;
+		font: 15px/45px a;
+		color: rgba(0,0,0,0.8);
+		background: #efeff0;
+	}
+	.top-back{
+		float: left;
+		width: 42px;
+		height: 44px;
+	}
+	.top-back:before{
+		content: '';
+		display: block;
+		margin: 15px 0 0 16px;
+		width: 10px;
+		height: 16px;
+		background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAgCAMAAAAlvKiEAAAAhFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8qm6wAAAALHRSTlMAAQIDBwgJCgsMDQ4PEBgeICEiIyQlJicoKTAxMjM1Njc8PUBDREVGR0hJTT9LFpYAAACLSURBVHhejcvZEoIwEETRgKIC7ipq3NcQ5///z6r0S4YZCu7jqW7TbDQQVLzJz5tWE5FPpRFlsZUu2IsZdi4XX92K2Jy0HFZ32hdWRjZpNz/tsPEHNgOgI4WsiUss9KDqnusJWvXRM3TH9QLdqrphml6ha1VXXG/QpaoLrveAv0TTzEh9AiKtHnZo/tjuItMqG8SVAAAAAElFTkSuQmCC) no-repeat;
+		background-size: 10px 16px;
+	}
+	.top-header_home{
+		float: right;
+		width: 44px;
+		height: 44px;
+		background: url(http://image.read.duokan.com/mfsv2/download/fdsc3/p01eZH42sBV7/QTS90E2ZVritaa.png)no-repeat center;
+		background-size: 16px;
+	}
+</style>
+
+<div class="top">
+	<a href="/" class="top-back"></a>
+	<span class="top-title"><%=nav%></span>
+	<a class="top-header_home" href="/"></a>
+	<!-- <a class="top-header_home" href="javascript:history.back()"></a> -->
+</div>

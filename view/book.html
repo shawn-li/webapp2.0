@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">  <!-- 不识别数字为电话 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<style type="text/css">
+	@media screen and (min-width:1000px){
+		.book-dash-btn:hover{
+			cursor: pointer;
+		}
+		.cover:hover{
+			cursor: pointer;
+		}
+	}
+	#app{
+		margin: 0 auto;
+	}
+	.book-main{
+		border-bottom: 10px solid #f5f5f5;
+	}
+	.book-main:first-child{
+		border-bottom: none;
+	}
+	.book-folder{
+		padding-bottom: 1px;
+	}
+	.book-dash .book-dash-btn-list li{
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+	.book-detail{
+		position: relative;
+		overflow: hidden;
+		padding: 30px 30px 20px 30px;
+		display: table;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	.book-cover{
+		width: 100px;
+		height: 134px;
+	}
+	.book-info-author a{
+		color: #6395c7;
+	}
+	.book-info-author>span{
+		display: inline-block;
+		margin-right: 5px;
+	}
+	.book-info-title{
+		font-size: 18px;
+		font-weight: 600;
+		margin-bottom: 13px;
+	}
+	.book-main .book-info{
+		padding: 0 0 0 14px;
+		display: table-cell;
+		vertical-align: middle;
+	}
+	.book-main .book-cover{
+		position: relative;
+		background: #eeece9;
+		box-shadow: 0 6px 5px -3px #aaa;
+		border: 1px solid #f0f0f0;
+		border-bottom: none;
+		overflow: hidden; 
+	}
+	.book-main .book-cover img{
+		width: 100%;
+		height: 100%;
+	}
+	.book-main .book-info-tag{
+		margin-left: 3px;
+		border: 1px solid #63bd6e;
+		color: #63bd6e;
+		border-radius: 4px;
+		font-size: 12px;
+		line-height: 16px;
+		display: inline-block;
+		padding: 0 2px;
+	}
+	.book-dash-btn-list{
+		font-size: 0;  /* 可以清楚inline-block*/
+		width: 100%;
+		white-space: nowrap;
+	}
+	.book-dash-btn-list li{
+		width: 49%;
+		display: inline-block;
+	}
+	.book-dash-btn-list li:first-child{
+		margin:2%;
+	}
+	.book-dash-wrap{
+		padding: 0 14px;
+		margin: 0 0 27px;
+	}
+	/*.book-dash-btn:after{
+		content: '\5f00\59cb\9605\8bfb';
+	}*/
+	.book-dash-btn{
+		display: block;
+		height: 2.8em;
+		line-height: 2.8em;
+		text-align: center;
+		border-radius: 4px;
+		font-size: 14px;
+		-webkit-box-sizing: border-box;
+		background: #f35d02;
+		border: 1px solid #e35109;
+		color: #fff;
+		padding:0 10px; 
+	}
+	.book-folder-detail{
+		position: relative;
+		line-height: 1.6;
+		padding: 0 14px;
+		margin-bottom: 10px;
+		color: #585858;
+		font-size: 14px;
+	}
+	.book-folder-gengxin{
+		text-align: center;
+		font-size: 14px;
+		border-top: 1px solid #f0f0f0;
+		color: #8d8d8d;
+	}
+	.book-main .folder-top{
+		font-size: 16px;
+		font-weight: normal;
+		color: #8d8d8d;
+		padding: 20px;
+	}
+	.book-folder-tag{
+		padding: 0 10px 10px 20px;
+	}
+	.book-folder-tag-list{
+		line-height: 1;
+		overflow: hidden;
+	}
+	.book-main .book-folder-tag-list>.tag{
+		padding: 0 20px;
+		margin: 0 10px 5px 0;
+		width: auto;
+		line-height: 1.8em;
+		display: inline-block;
+		color: #fff;
+		border-radius: 4px;
+		background: #909da8;
+		text-align: center;
+		border: 1px solid #d3d3d3;
+	}
+	.book-main .book-folder-tag-list>.tag:nth-child(3n+1){
+		background-color: #fbebe8;
+		color: #766d5d;
+	}
+	.book-main .book-folder-tag-list>.tag:nth-child(3n+2){
+		background-color: #63bd6e;
+		color: #766d5d;
+	}
+	
+	.book-main .book-main-title{
+		margin-bottom: 8px;
+		padding:15px 14px;
+		color:#8d8d8d;
+	}
+	.book-vertical{
+		padding: 0 40px;
+	}
+	.book-vertical .info-title{
+		font-size: 13px;
+		line-height: 1.4em;
+		max-height: 2.8em;
+		overflow: hidden;
+		color: #8d8d8d;
+		margin-bottom: 0px;
+	}
+	.book-vertical .cover{
+		float: none;
+		height: 113px;
+		width: 86px;
+	}
+	.book-vertical .cover img{
+		width: 100%;
+		height: 100%;
+	}
+	.book-vertical .info{
+		margin-left: 0px;
+		padding-top: 8px;
+		width: 86px;
+	}
+	.book-main .book-list{
+		font-size: 0;
+	}
+	.book-main .book-list li{
+		width: 25%;
+		display: inline-block;
+		vertical-align: top;
+		line-height: 1;
+		margin-bottom: 8px;
+	}
+	.book-main-version{
+		padding: 0 10px 20px 20px;
+	}
+	</style>
+	<title>书籍详情</title>
+</head>
+<body>
+	<div id="app" style="width: {{screen_width}}px;overflow: hidden;">
+		<% include include/common-header.html %>
+
+		<div class="container-scroll" style="width: {{screen_width}}px;">
+			<div class="book-page">
+				<section class="book-main">
+					<div class="book-detail">
+						<div class="book-cover">
+							<img alt="{{item.cover}}" v-bind:src='item.cover'>
+						</div>
+						<div class="book-info">
+							<h3 class="book-info-title">{{item.title}}</h3>
+							<p class="book-info-author">作者: <a href="javascript:">{{item.authors}}</a></p>
+							<div class="book-info-evaluate">
+								<span class="evaluate-text">{{item.score_count}} 个评价</span>
+							</div>
+							<p class="book-info-click">点击率: {{item.click}}</p>
+							<p class="book-info-price">价格: {{item.price}}书币/千字</p>
+							<p class="book-info-count">紫薯: {{item.word_count}} 字
+								<span class="book-info-tag">连载中</span>
+							</p>
+
+						</div>
+					</div>
+				</section>
+				<section class="book-main">
+					<div class="book-dash">
+						<div class="book-dash-wrap">
+							<ul class="book-dash-btn-list">
+								<li class="book-dash-btn" v-on:click="readBook()">
+									<span class="book-dash-btn-text">开始阅读</span>
+								</li>
+								<li class="book-dash-btn" v-on:click="buyBook()">
+									<span class="book-dash-btn-text">购&nbsp&nbsp买</span>
+								</li>
+							</ul>
+						</div>
+						<div class="book-folder">
+							<div class="book-folder-detail">{{item.content}}</div>
+							<div class="book-folder-gengxin">更新:{{item.lastest}}</div>
+						</div>
+					</div>
+				</section>
+				<section class="book-main">
+					<div class="book-folder">
+						<div class="folder-top">
+							<h3>类别标签</h3>
+						</div>
+						<div class="book-folder-tag">
+							<ul class="book-folder-tag-list">
+								<li class="tag" v-for="tag in item.tags">{{tag}}</li>
+							</ul>
+						</div>
+					</div>
+				</section>
+				<section class="book-main">
+					<div class="book-main-title">
+						<h1>作者的其他作品</h1>
+					</div>
+					<div class="book-main-content">
+						<ul class="book-list">
+							<li v-for="book in author_books">
+								<div class="book-vertical">
+									<div class="cover">
+										<img alt="{{book.title}}" v-bind:src="book.cover">
+									</div>
+									<div class="info">
+										<h3 class="info-title">{{book.title}}</h3>
+									</div>
+								</div>
+							</li>
+								
+						</ul>
+					</div>
+				</section>
+				<section class="book-main">
+					<div class="book-main-title">
+						<h1>喜欢书的人也喜欢</h1>
+					</div>
+					<div class="book-main-content">
+						<ul class="book-list">
+							<li v-for="book in related">
+								<div class="book-vertical">
+									<div class="cover">
+										<img alt="{{book.title}}" v-bind:src="book.cover">
+									</div>
+									<div class="info">
+										<h3 class="info-title">{{ book.title }}</h3>
+									</div>
+								</div>
+							</li>
+							
+						</ul>
+					</div>
+				</section>
+				
+				<section class="book-main">
+					<div class="book-main-title">
+						<h1>版权归属</h1>
+					</div>
+					<div class="book-main-version">
+						<h4>版本: {{item.rights}}</h4>
+					</div>
+				</section>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/static/scripts/vue.js"></script>
+	<script type="text/javascript" src="/static/scripts/zepto.js"></script>
+	<script type="text/javascript" src="/static/scripts/pages/book.js"></script>
+</body>
+</html>

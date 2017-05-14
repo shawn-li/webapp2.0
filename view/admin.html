@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">  <!-- 不识别数字为电话 -->
+    <title><%=title%></title>
+	<!--用百度的静态资源库的cdn安装bootstrap环境-->  
+    <!-- Bootstrap 核心 CSS 文件 -->  
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+    <link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">  
+    <!--font-awesome 核心我CSS 文件-->  
+    <link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">  
+        @media screen and (min-width:900px){
+            .container{
+                width: 70%;
+                margin: 0 auto;
+            }
+        }
+        .container{
+            padding: 0;
+        }
+        body{font-size: 10px;} 
+        
+        h3{
+        	font-weight: 800;
+        }
+        .txt{
+        	font-size: 16px;
+        }
+        div.form.row{
+        	width: 80%;
+        	margin: 0px auto;
+        	margin-top: 50px;
+        } 
+        div.form.row form{
+        	width: 100%;
+        	padding: 0px;
+        }
+        .ipt{
+			height: 40px;
+			margin-left: 20px;
+			font: 24px/40px a;
+        }
+        .btn{
+        	height: 30px;
+        	font: 18px/16px a;
+        }
+        .form{background: rgba(255,255,255,0.2);margin:100px auto;}  
+        #login_form{display: block;}  
+        #register_form{display: none;}  
+        .fa{display: inline-block;top: 30px;left: 30px;position: relative;color: #ccc;}  
+        input[type="text"],input[type="password"]{padding-left:26px;}  
+        .checkbox{padding-left:21px;}  
+        .form-group:last-child{
+			margin-top: 40px;
+        }
+
+        #password-error,#username-error,#register_username-error,#register_password-error,#register_rpassword-error,#email-error{
+            margin-left: 18px;
+            color: rgb(255, 0, 0);
+            font-weight: 100;
+            font-size: 12px;
+        }
+    </style>  
+</head>  
+<body>  
+        <!--  
+            基础知识：  
+            网格系统:通过行和列布局  
+            行必须放在container内  
+            手机用col-xs-*  
+            平板用col-sm-*  
+            笔记本或普通台式电脑用col-md-*  
+            大型设备台式电脑用col-lg-*  
+            为了兼容多个设备，可以用多个col-*-*来控制；  
+        -->  
+    <% include include/common-header.html %>
+    <div class="container">
+        <div class="form row">  
+            <form class="form-horizontal col-xs-12" id="login_form" method="get">  
+                <h3 class="form-title">请输入您的帐号:</h3>  
+                <div class="col-xs-12">  
+                    <div class="form-group">  
+                        <i class="fa fa-user fa-lg"></i>  
+                        <input id="username" class="form-control required ipt" type="text" placeholder="用户名" name="username" autofocus="autofocus" maxlength="20"/>  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-lock fa-lg"></i>  
+                            <input class="form-control required ipt" type="password" placeholder="密码" name="password" maxlength="8"/>  
+                    </div>  
+                    <div class="form-group">  
+                        <label class="checkbox txt  col-xs-4 col-xs-offset-8">  
+                            <input type="checkbox" name="remember" value="1"/>记住帐号  
+                        </label>  
+                        <hr />  
+                        
+                    </div>  
+                    <div class="form-group">  
+                    	<a href="javascript:;" id="register_btn" class="txt col-xs-offset-1">快速注册</a>  
+                        <input type="submit" id="login" class="btn btn-success col-xs-3 pull-right" value="登录"/>     
+                    </div>  
+                </div>  
+            </form>  
+        </div>  
+  
+        <div class="form row">  
+            <form class="form-horizontal  col-xs-12" id="register_form" method="post">  
+                <h3 class="form-title">请注册您的帐号</h3>  
+                <div class="col-xs-12">  
+                    <div class="form-group">  
+                        <i class="fa fa-user fa-lg"></i>  
+                        <input class="form-control required ipt" type="text" placeholder="用户名" name="register_username" id="register_username" autofocus="autofocus"/>  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-lock fa-lg"></i>  
+                            <input class="form-control required ipt" type="password" placeholder="密码" id="register_password" name="password"/>  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-check fa-lg"></i>  
+                            <input class="form-control required ipt" type="password" placeholder="再次确认密码" name="rpassword" id="register_rpassword"/>  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-envelope fa-lg"></i>  
+                            <input class="form-control eamil ipt" type="text" placeholder="Email" name="email"/>  
+                    </div>  
+                    <div class="form-group">  
+                        <input type="submit" id="register" class="btn btn-success pull-right col-xs-3" value="注册"/>  
+                        <input type="submit" class="btn btn-info pull-left col-xs-3" id="back_btn" value="后退"/>  
+                    </div>  
+                </div>  
+            </form>  
+        </div>  
+     </div>  
+	
+	<!-- 在bootstrap.min.js 之前引入 -->  
+    <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>  
+    <script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <!-- Bootstrap 核心 JavaScript 文件 -->  
+    <script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>  
+    <!--jquery.validate-->  
+    <script src="http://cdn.bootcss.com/jquery-validate/1.16.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="/static/scripts/pages/admin.js" ></script>  
+</body>
+</html>

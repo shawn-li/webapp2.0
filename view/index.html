@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">  <!-- 不识别数字为电话 -->
+	<link rel="shortcut icon" type="image/x-icon" href="/static/images/Iconfont.png" media="screen" /> <!-- 这个作用是在浏览器地址栏显示您的小图标 -->
+	<link rel='bookmark' href='/static/images/Iconfont.png'> 
+		<!-- 这个作用是在收藏夹里面显示您的小图标 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/all.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+
+	<style type="text/css">
+	.index-action{
+		position: fixed;
+		width: 100%;
+		background: none;
+		z-index: 1002;
+	}
+	.container_show{
+		display: block;
+	}
+	</style>
+	<title><%= title%></title>
+</head>
+<body>
+	<div id="app" style="width: {{screen_width}}px; overflow: hidden;overflow-x: hidden;">
+		<% include include/header.html %>
+
+		<div class="js-transform" style="width: {{double_screen_width}}px;transition-duration: {{duration}}s;transform: translate3d({{position}}px,0,0);">
+			<div class="container-wrap" style="width: {{screen_width}}px;float: left;"><!-- :sliderinit="sliderinit" -->
+				<div class="container-scroll" style="top: 0px;left: 0px;">
+					
+					<% include include/index-top.html %>
+					<% include include/index-hot.html %>
+					<% include include/index-female.html %>
+					<% include include/index-male.html %>
+					<% include include/index-recommend.html %>
+					<% include include/index-free.html %>
+					<% include include/index-bottom.html %>
+				
+				</div>
+			</div>
+			<div class="container-shelf" style="width: {{screen_width}}px; height:{{screen_height}}px;float: left;display: none;">
+				<% include include/index-shelf.html %>
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="/static/scripts/vue.js"></script>
+	<script type="text/javascript" src="/static/scripts/zepto.js"></script>
+	<script type="text/javascript" src="/static/scripts/pages/index.js"></script>
+
+</body>
+</html>

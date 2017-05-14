@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<meta name="format-detection" content="telephone=no">  <!-- 不识别数字为电话 -->
+	<link rel="stylesheet" type="text/css" href="/static/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/all.css">
+	<style type="text/css">
+		@media screen and (min-width:1300px){
+			#app{
+				margin: 0 auto;
+			}
+		}
+		.category-summary{
+			font-weight: bold;
+			color: #000;
+		    padding-left: 10px;
+		    margin-top: 0px;
+		    font-size: 14px;
+		   
+		}
+		.book-content-summary{
+			-webkit-line-clamp: 3;
+		}
+		.book-category-logo img{
+			width: 80px;
+		}
+		.top-home-btn{
+			position: relative;
+		}
+		.top-line{
+			position: absolute;
+			bottom: 0;
+		}
+		.top-line:before{
+			content: '';
+			height: 2px;
+			width: 54px;
+			background: #777;
+			display: block;
+		}
+		.append-item{
+			font-size: 14px;
+			height: 50px;
+			margin-left: 50px;
+			padding: 10px;
+			overflow: hidden;
+		}
+		.append-item span{
+			padding: 20px 30px;
+			font: 20px/50px a;
+			font-weight: 500;
+			vertical-align: top;
+		}
+		.append-item img{
+			margin-top: 10px;
+		}
+		.nomore{
+			padding: 10px;
+			font-size: 16px;
+		}
+		.scale{
+			transform: rotate(360deg);
+			transition-duration: 2s;
+		}
+	</style>
+	<title>书架</title>
+</head>
+<body>
+	<div id="app" style="width: {{screen_width}}px;overflow: hidden;overflow-x: hidden;">
+		<% include include/common-header.html %>
+		<ul class="top-home-btn">
+			<i class="top-line" style="width: {{screen_width}}px;transition-duration: {{duration}}s;transform: translate3d({{header_position}}px,0,0);"></i>
+			<li v-for="item in section" >
+				<a class="btn-tab" href="javascript:" v-on:click="tabSwitch">
+					<!-- <img class="top-home-btn-icon" src="/static/images/male.png"> -->
+					<span id="key" class="btn" data-type="{{ item.key }}">{{ item.name }}</span>
+				</a>
+			</li>
+		</ul>
+		<div class="wrap" style="width: {{quadruple_screen_width}}px;transition-duration: {{duration}}s;transform: translate3d({{position}}px,0,0);overflow: hidden;">
+
+			<div class="channel type-container" style="width:{{screen_width}}px;float: left;">
+					<div class="channel-header">
+						<p class="channel-header-title">图书分类</p>
+					</div>
+					<ul id="channel_book" class="channel-list active_class" data-type="book">
+						<li v-for="item in book" v-if="$index>=0 && $index <10 ">
+							<div class="channel-book">
+								<a href="javascript:">
+									<div class="book-cover">
+										<img alt="{{ item.label }}" v-bind:src="item.cover">
+										<!-- <p class="book-isfinish">完结</p> -->
+									</div>
+									<div class="book-content">
+										<span class="book-noimg-order category-label">{{ item.label }}</span>
+										<p class="book-content-summary category-summary">书名: {{ item.titles }}</p>
+										<p class="book-content-summary">简介:{{ item.description }}</p>
+
+										<!-- <div class="book-category-logo">
+											<img alt="{{ item.label }}" v-bind:src="item.new_image">
+											<!-- <p class="book-isfinish">完结</p> -->
+										<!-- </div> -->
+									</div>
+								</a>
+							</div>
+						</li>
+					</ul>
+			</div>
+
+			<div class="channel type-container" style="width:{{screen_width}}px; float: left;">
+					<div class="channel-header">
+						<p class="channel-header-title">杂志分类</p>
+					</div>
+					<ul id="channel_magazine" class="channel-list" data-type="magazine">
+						<li v-for="item in magazine" v-if="$index>=0 && $index <10 ">
+							<div class="channel-book">
+								<a href="javascript:">
+									<div class="book-cover">
+										<img alt="{{ item.label }}" v-bind:src="item.image">
+										<!-- <p class="book-isfinish">完结</p> -->
+									</div>
+									<div class="book-content">
+										<span class="book-noimg-order category-label">{{ item.label }}</span>
+										<p class="book-content-summary category-summary">书籍数量:{{ item.count }}</p>
+										<p class="book-content-summary">简介:{{ item.description }}</p>
+										<!-- <div class="book-category-logo">
+											<img alt="{{ item.label }}" v-bind:src="item.new_image">
+											<!-- <p class="book-isfinish">完结</p> -->
+										<!-- </div> -->
+									</div>
+								</a>
+							</div>
+						</li>
+					</ul>
+			</div>
+			<div class="channel type-container" style="width:{{screen_width}}px; float: left;">
+					<div class="channel-header">
+						<p class="channel-header-title">网文男频</p>
+					</div>
+					<ul id="channel_male" class="channel-list" data-type="male">
+						<li v-for="item in male" v-if="$index>=0 && $index <10 ">
+							<div class="channel-book">
+								<a href="javascript:">
+									<div class="book-cover">
+										<img alt="{{ item.label }}" v-bind:src="item.new_image">
+										<!-- <p class="book-isfinish">完结</p> -->
+									</div>
+									<div class="book-content">
+										<span class="book-noimg-order category-label">{{ item.label }}</span>
+										<p class="book-content-summary category-summary">书籍数量:{{ item.count }}</p>
+										<p class="book-content-summary">简介:{{ item.description }}</p>
+										<!-- <div class="book-category-logo">
+											<img alt="{{ item.label }}" v-bind:src="item.new_image">
+											<!-- <p class="book-isfinish">完结</p> -->
+										<!-- </div> -->
+									</div>
+								</a>
+							</div>
+						</li>
+					</ul>
+			</div>
+			<div class="channel type-container" style="width:{{screen_width}}px; float: left;">
+					<div class="channel-header">
+						<p class="channel-header-title">网文女频</p>
+					</div>
+					<ul id="channel_female" class="channel-list" data-type="female">
+						<li v-for="item in female" v-if="$index>=0 && $index <10 ">
+							<div class="channel-book">
+								<a href="javascript:">
+									<div class="book-cover">
+										<img alt="{{ item.label }}" v-bind:src="item.new_image">
+										<!-- <p class="book-isfinish">完结</p> -->
+									</div>
+									<div class="book-content">
+										<span class="book-noimg-order category-label">{{ item.label }}</span>
+										<p class="book-content-summary category-summary">书籍数量:{{ item.count }}</p>
+										<p class="book-content-summary">简介:{{ item.description }}</p>
+										<!-- <div class="book-category-logo">
+											<img alt="{{ item.label }}" v-bind:src="item.new_image">
+											<!-- <p class="book-isfinish">完结</p> -->
+										<!-- </div> -->
+									</div>
+								</a>
+							</div>
+						</li>
+					</ul>
+			</div>
+		</div>
+		
+
+	</div>
+
+
+	<script type="text/javascript" src="/static/scripts/vue.js"></script>
+	<script type="text/javascript" src="/static/scripts/zepto.js"></script>
+	<script type="text/javascript" data-script='vue' src="/static/scripts/pages/category.js"></script>
+	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="/static/scripts/pushToRefresh.js"></script>
+
+	<script type="text/javascript">
+		var num=10;
+		function changeNum(){
+			num=10;
+			console.log('重置num为10');
+		}
+
+		var push=$('ul.active_class').pushToRefresh({ 
+			maxheight:100,
+			animateHTML:'<div class="append-item"><span>下拉加载</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA5klEQVRYR+2VSw6DMAxEh5v0ZqUnK9ysR0Ej1RIKJP7EVbpINkjI+D2Nk7Bg8FoG8zEF/jKBB4DPj/bGpXeZwArgDeAFYEuWuO19FpAC4WZKVHuLQFmQKdHsTYFaQYaE2psCnPVTmXdkHBqcyF1GkC1hgjP98ybMkjDDGUF5DHslXPA7Ab6LSrjhNYGIRAjeEvBIsJa3Z2vt3+N+qdF+RpZxaDd2Fa4lII17JJpwq4B1HGUSKtwj4JUwwb0CVgkzPCKgSbjgUYGahBveI1BKhOC9AiLBJ2/C0NIuolBTz0dTYCYwPIED26Y9IaqYHw8AAAAASUVORK5CYII="></div>'
+			// onInit:function(res){
+			// 	console.log(res);
+			// }
+		}).on('onInit',function(e,res){
+
+			//console.log(e);
+			//console.log(res);
+		}).on('onDrag',function(e, res){
+			
+				//console.log(romateImg);
+				res.$element.find('img').css( 'transform', 'rotate(180deg)');
+				res.$element.find('span').html('松开加载数据');
+			
+		}).on('onLoading',function(e,res){
+			setTimeout(pushajax, 2000);
+		}).on('onShrink',function(e,res){
+			//console.log(res.$element.find('span'));
+			res.$element.find('span').html('正在加载数据');
+			res.$element.find('img').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB70lEQVRYR82W4TEEQRCF30VABogAESACRIAMiAARkAEiQASIABEgAzJQ39XMVu9Uz+3M3NbSv7idfv26X3fPzNRm65KuJG0F9zdJZ5I+a+FmtQ6SCP4qaTXx/Za0XUuihcCDpP0M8UdJBzVJtRAg05VMECTYCN+o0KakXUnPkl48n0UE0JdMyQqNoy0i8BUkwvc+/B39wDhJsJQjcCvpyATlf5yxIQmOQ4/QK6lBgj7pzCMAe5ostcMQHGCAUhl+wlTE7HOtsBckmX/3CFxIOne8LyXxDYPEdTKGp2ECcv4R0uK4BIYqkMss/s4UoH9zBXBMe6BmvOh+JFpzGLyHqaCRsxLYTKgGYDRejeGHjyXBhFAdO1HZKagJljtLJdgBMQl2QZd5SQXGIDGIkU5BnN3qS2UwUuaAJWAbzy6eVuzUDzluwo8sNSTpesAbPXb6mJUAKzZld2fECkxBwN4h8c7oTYGV4E4SO31MQwJiYGD3JIiB/rQJx8y2GKvlQVIMXnLwXxOILyKeUvOGaTAab8d5VXVQuQrQjB8mYO8RUUiE4E/mrLtXcgTSR0XvEVFIoAijtAK843rXaAGJdLlVVQB8ZGBhsDy8lezu9oTYEMZS7wF3txdUpndkmTF0d/uUBNzdPiWB2lju+WUkGIXAL2C6ZSHwl9pBAAAAAElFTkSuQmCC').addClass('scale');
+		})
+		;
+
+		var pushajax= function(){
+
+			$.get( '/ajax/category', function(d){
+				var type=$('ul.active_class').attr('data-type');
+
+				console.log(type);
+				console.log('No.'+num);
+				//console.log(d.book.length);
+				console.log(d.items);
+				
+				var len;
+				switch(type){
+					case 'book':
+						len=d.book.length;
+						break;
+					case 'magazine':
+						len=d.magazine.length;
+						break;
+					case 'male':
+						len=d.male.length;
+						break;
+					case 'female':
+						len=d.female.length;
+						break;
+				}
+				console.log('len:'+len);
+				console.log('length:'+num);
+				//console.log();
+				if (num < len) {
+				// if (num < d.book.length ) {
+					var type=$('ul.active_class').attr('data-type');
+					console.log(type);
+					console.log('<li class="new"><div class="channel-book"><a href="javascript:"><div class="book-cover"><img alt="{{ book['+num+'].label }}" v-bind:src="book['+num+'].image"></div><div class="book-content"><span class="book-noimg-order category-label">{{ book['+num+'].label }}</span><p class="book-content-summary category-summary">书名: {{ book['+num+'].titles }}</p><p class="book-content-from">简介:{{ book['+num+'].description }}</p></div></a></div></li>');
+
+					if (type == 'book') {
+						$('ul.active_class').append('<li class="new"><div class="channel-book"><a href="javascript:"><div class="book-cover"><img alt="{{ book['+num+'].label }}" v-bind:src="book['+num+'].image"></div><div class="book-content"><span class="book-noimg-order category-label">{{ book['+num+'].label }}</span><p class="book-content-summary category-summary">书名: {{ book['+num+'].titles }}</p><p class="book-content-from">简介:{{ book['+num+'].description }}</p></div></a></div></li>');
+						console.log('this is book page');
+					}else if (type =='magazine') {
+						$('ul.active_class').append('<li class="new"><div class="channel-book"><a href="javascript:"><div class="book-cover"><img alt="{{ magazine['+num+'].label }}" v-bind:src="magazine['+num+'].image"></div><div class="book-content"><span class="book-noimg-order category-label">{{ magazine['+num+'].label }}</span><p class="book-content-summary category-summary">书名: {{ magazine['+num+'].titles }}</p><p class="book-content-from">简介:{{ magazine['+num+'].description }}</p></div></a></div></li>');
+						console.log('this is magazine page');
+					}else if (type =='male') {
+						$('ul.active_class').append('<li class="new"><div class="channel-book"><a href="javascript:"><div class="book-cover"><img alt="{{ male['+num+'].label }}" v-bind:src="male['+num+'].image"></div><div class="book-content"><span class="book-noimg-order category-label">{{ male['+num+'].label }}</span><p class="book-content-summary category-summary">书名: {{ male['+num+'].titles }}</p><p class="book-content-from">简介:{{ male['+num+'].description }}</p></div></a></div></li>');
+						console.log('this is male page');
+					}else if (type =='female') {
+						$('ul.active_class').append('<li class="new"><div class="channel-book"><a href="javascript:"><div class="book-cover"><img alt="{{ female['+num+'].label }}" v-bind:src="female['+num+'].image"></div><div class="book-content"><span class="book-noimg-order category-label">{{ female['+num+'].label }}</span><p class="book-content-summary category-summary">书名: {{ female['+num+'].titles }}</p><p class="book-content-from">简介:{{ female['+num+'].description }}</p></div></a></div></li>');
+						console.log('this is female page');
+					}
+					num++;
+
+				}else{
+					console.log($('.nomore').length);
+					if ( $('.nomore').length == 0 ) {
+						$('ul.active_class').append('<div class="nomore">暂无更多数据</div>');
+					}else{
+						return;
+					}
+					
+				}
+			
+				new Vue({
+					el:'#app',
+					data:{
+						book:d.book,
+						magazine:d.magazine,
+						male:d.male,
+						female:d.female
+					}
+				});
+
+			},'json'); 
+			
+			push.close();
+
+		}
+
+	</script>
+
+	
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=title %></title>
+	<style type="text/css">
+	div.row{
+		width: 156px;
+	}
+	div.cell{
+		border: 1px solid black;
+	}
+	div.row:after{
+		content: '';
+		overflow:hidden;
+		visibility: hidden;
+		height: 0;
+	}
+	div.row div{
+		width: 50px;
+		text-align: center;
+		font: 16px/24px a;
+	}
+	.left{
+		background-color: red;
+		float: left;
+	
+	}
+	.center{
+		background-color: blue;
+		float: left;
+	}
+	.right{
+		background-color: gray;
+		float: right;
+	}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="row">
+			<div class="cell left">1</div>
+			<div class="cell center">2</div>
+			<div class="cell right">3</div>
+		</div>
+		<div class="row">
+			<div class="cell left">1</div>
+			<div class="cell center">2</div>
+			<div class="cell right">3</div>
+		</div>
+		<div class="row">
+			<div class="cell left">1</div>
+			<div class="cell center">2</div>
+			<div class="cell right">3</div>
+		</div>
+
+	</div>
+</body>
+</html>

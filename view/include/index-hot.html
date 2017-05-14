@@ -1,0 +1,42 @@
+
+<section class="channel">
+	<div class="channel-header">
+		<p class="channel-header-title">本周最火</p>
+	</div>
+	<ul class="channel-list">
+		<li v-for="item in hot" v-if="$index==0">
+ 
+			<div class="channel-book">
+				<a href="/book?id={{ item.fiction_id }}">
+					<div class="book-cover">
+						<img alt="{{ item.title }}" v-bind:src="item.cover">
+						<p class="book-isfinish">完结</p>
+					</div>
+					<div class="book-content">
+						<span class="book-noimg-order">0{{ $index+1 }}</span>
+						<p class="book-content-title">{{ item.title }}</p>
+						<p class="book-content-author">{{ item.authors }}</p>
+						<p class="book-content-summary">{{ item.summary }}</p>
+						<div class="book-content-wrap-tag">
+							<div class="book-content-tag" v-for="tag in item.tags">
+								{{ tag }}
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</li>
+		<li v-for="item in hot" v-if="$index>0 && $index<9">
+			<div class="channel-book book-noimg">
+				<a href="/book?id={{ item.fiction_id }}">
+					<span class="book-noimg-order">0{{ $index+1 }}</span>
+					<div class="book-noimg-info">
+						<p class="book-noimg-info-title">{{ item.title }}</p>
+						<!-- <p class="book-noimg-info-author"></p>
+						<p class="book-noimg-info-summary"></p> -->
+					</div>
+				</a>
+			</div>
+		</li>
+	</ul>
+</section>

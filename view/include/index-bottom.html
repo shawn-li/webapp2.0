@@ -1,0 +1,18 @@
+<section class="channel">
+	<div class="channel-header">
+		<p class="channel-header-title">重磅推荐<i>热</i></p>
+	</div>
+	<ul class="banner-list">
+		
+			<li v-for="item in topic" v-if="$index==0">
+				<div class="banner-cover">
+					<img alt="{{item.ad_name}}" class="cover" v-bind:src="item.ad_pic_url"></div>
+			</li>
+			<li  v-for="item in topic" v-if="$index==1">
+				<div class="banner-cover">
+					<img alt="{{item.ad_name}}" class="cover" src="http://image.read.duokan.com/mfsv2/download/fdsc3/p01cjtwdtMY9/vOmsMitEMiFJmW.jpg"></div>
+			</li>
+		
+	</ul>
+	<a class="channel-free-more" href="/special_topic">更多精彩专题&gt&gt</a>
+</section>
