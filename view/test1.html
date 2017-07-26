@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>幻灯片插件测试</title>
+</head>
+<body>
+	<div class="div">
+		<a href="http://dushu.xiaomi.com/#page=channel&id=410">
+		<img class="cover" src="http://image.read.duokan.com/mfsv2/download/fdsc3/p01tBqnupVze/qayTXiXrMm1lVm.jpg"/></a>
+
+		<a href="http://dushu.xiaomi.com/#page=channel&id=410" style="display: none;">
+		<img class="cover" src="../static/images/cover1.jpg"/></a>
+
+		<a href="http://dushu.xiaomi.com/#page=channel&id=410" style="display: none;">
+		<img class="cover" src="../static/images/cover2.png"/></a>
+
+		<a class="a" style="padding: 20px;border: 1px gray solid;cursor: pointer;">上一个</a>
+		<a class="b" style="padding: 20px;border: 1px gray solid;cursor: pointer;">下一个</a>
+	</div>
+	
+	<script type="text/javascript" src="../static/scripts/zepto.js"></script>
+	<script type="text/javascript" src="../static/scripts/lx-slider.js"></script>
+	<script type="text/javascript">
+		$('.div').lxslider({
+			pre_button:$('.a'),
+			next_button:$('.b')
+		}).on('pre',function(e,res){
+			console.log("----成功");
+		});
+	</script>
+
+</body>
+</html>

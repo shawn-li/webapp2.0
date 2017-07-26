@@ -303,6 +303,9 @@
 			.fiction-action-bottom{
 				height: 20%;
 			}
+			.catalog-focus{
+				color: #ec8c2b;
+			}
 		</style>
 	</head>
 	<body>
@@ -657,6 +660,8 @@
 						top_nav:$('#top_nav'),
 						bottom_nav:$('.js-bottom-nav'),
 						bottom_option:$('.js-bottom-option'),
+						catalog_font:$('#block_catalog_font'),
+						catalog_catalog:$('#block_catalog_catalog'),
 						icon_font:$('.icon-font'),
 						bg_color:$('.option-bgcolor'),
 						mode_day:$('#catalog_mode_day'),
@@ -748,8 +753,12 @@
 								}, 100 ,'ease-out').animate({
 									opacity:1
 								}, 500 ,'ease-out');
+								Dom.catalog_font.removeClass('catalog-focus');
+								Dom.catalog_catalog.addClass('catalog-focus');
+
 							}else{
 								Dom.mulu.hide();
+								Dom.catalog_catalog.removeClass('catalog-focus');
 							}
 						});
 
@@ -764,10 +773,11 @@
 								}, 100 ,'ease-out').animate({
 									opacity:1
 								}, 500 ,'ease-out');
-								Dom.icon_font.addClass('focus');
+								Dom.catalog_catalog.removeClass('catalog-focus');
+								Dom.catalog_font.addClass('catalog-focus');
 							}else{
 								Dom.bottom_option.hide();
-								Dom.icon_font.removeClass('focus');
+								Dom.catalog_font.removeClass('catalog-focus');
 							}
 						});
 						$('.option-bgcolor').click(function(){
@@ -830,6 +840,7 @@
 								Dom.bottom_option.hide();
 								Dom.icon_font.removeClass('focus');
 								Dom.mulu.hide();
+								Dom.catalog_catalog.removeClass('catalog-focus');
 							}
 						});
 						$('#fiction_action_bottom').click(function(){
@@ -865,7 +876,8 @@
 							Dom.bottom_nav.hide();
 							Dom.bottom_option.hide();
 							Dom.mulu.hide();
-							Dom.icon_font.removeClass('focus');
+							Dom.catalog_catalog.removeClass('catalog-focus');
+							Dom.catalog_font.removeClass('catalog-focus');
 						});
 
 						//下一页 上一页

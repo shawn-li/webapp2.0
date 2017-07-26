@@ -228,8 +228,7 @@
 			//console.log(res.$element.find('span'));
 			res.$element.find('span').html('正在加载数据');
 			res.$element.find('img').attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAB70lEQVRYR82W4TEEQRCF30VABogAESACRIAMiAARkAEiQASIABEgAzJQ39XMVu9Uz+3M3NbSv7idfv26X3fPzNRm65KuJG0F9zdJZ5I+a+FmtQ6SCP4qaTXx/Za0XUuihcCDpP0M8UdJBzVJtRAg05VMECTYCN+o0KakXUnPkl48n0UE0JdMyQqNoy0i8BUkwvc+/B39wDhJsJQjcCvpyATlf5yxIQmOQ4/QK6lBgj7pzCMAe5ostcMQHGCAUhl+wlTE7HOtsBckmX/3CFxIOne8LyXxDYPEdTKGp2ECcv4R0uK4BIYqkMss/s4UoH9zBXBMe6BmvOh+JFpzGLyHqaCRsxLYTKgGYDRejeGHjyXBhFAdO1HZKagJljtLJdgBMQl2QZd5SQXGIDGIkU5BnN3qS2UwUuaAJWAbzy6eVuzUDzluwo8sNSTpesAbPXb6mJUAKzZld2fECkxBwN4h8c7oTYGV4E4SO31MQwJiYGD3JIiB/rQJx8y2GKvlQVIMXnLwXxOILyKeUvOGaTAab8d5VXVQuQrQjB8mYO8RUUiE4E/mrLtXcgTSR0XvEVFIoAijtAK843rXaAGJdLlVVQB8ZGBhsDy8lezu9oTYEMZS7wF3txdUpndkmTF0d/uUBNzdPiWB2lju+WUkGIXAL2C6ZSHwl9pBAAAAAElFTkSuQmCC').addClass('scale');
-		})
-		;
+		});
 
 		var pushajax= function(){
 
@@ -239,7 +238,7 @@
 				console.log(type);
 				console.log('No.'+num);
 				//console.log(d.book.length);
-				console.log(d.items);
+				console.log(d);
 				
 				var len;
 				switch(type){
@@ -281,7 +280,7 @@
 					num++;
 
 				}else{
-					console.log($('.nomore').length);
+					console.log('over'+$('.nomore').length);
 					if ( $('.nomore').length == 0 ) {
 						$('ul.active_class').append('<div class="nomore">暂无更多数据</div>');
 					}else{

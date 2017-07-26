@@ -21,7 +21,7 @@
 			var _this = this;
 			$.get('/ajax/search',{
 				keyword:keyword
-			},function(d){
+			},function(d){ 
 				console.log(d.items);
 				_this.condition = true;
 				_this.search = d.items;

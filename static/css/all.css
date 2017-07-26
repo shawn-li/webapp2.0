@@ -134,9 +134,50 @@
 		border: 1px solid #f5f5f5;
 		border-radius: 2px;
 	}
-	.cover{
-		width: 100%;
+	.top-preview{
+		position: relative;
+		max-height: 300px;
+		max-width: 800px;
+		min-width: 400px;
+		min-height:150px;
 	}
+	
+	.cover{
+		width: 98%;
+		display: block;
+		margin: 0 auto;
+	}
+	.cover_pre{
+		position: absolute;
+		left: 2%;
+		opacity: 0.3;
+		top: 30%;
+	}
+	.cover_next{
+		position: absolute;
+		right: 2%;
+		opacity: 0.3;
+		top: 30%;
+	}
+	@media screen and (min-width:1000px){
+		.cover_pre{
+			padding: 20px 0;
+			opacity: 0;
+		}
+		.cover_next{
+			padding: 20px 0;
+			opacity: 0;
+		}
+		.cover_pre:hover{
+			background-color: #999;
+			opacity: 0.5;
+		}
+		.cover_next:hover{
+			background-color: #999;
+			opacity: 0.5;
+		}
+	}
+
 	.top-home-btn{
 		margin: 5px 0px;
 		display: -webkit-box;

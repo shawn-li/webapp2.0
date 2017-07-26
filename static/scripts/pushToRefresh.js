@@ -20,7 +20,7 @@
 			}
 			if (isDiv == 'scroll')  break;
 		}
-		console.log(el[0]);
+		console.log("el[0]--"+ el[0]);
 		//容器高度
 		el.boxHeight = target? target.height():el.height();
 		//内容高度
@@ -89,20 +89,20 @@
 				// el.trigger('onDrag',params);
 		});
 
-		el.bind('scroll',function(e){
-			if (!el.workFlag) return;
-			console.log( $(window).scrollTop() );
-			console.log('内容高度--'+ ($(window).scrollTop()+el.docHeight));
-			if ( ($(window).scrollTop()+el.docHeight+5)> $(document).height() ) {
+		// el.bind('scroll',function(e){
+		// 	if (!el.workFlag) return;
+		// 	console.log( $(window).scrollTop() );
+		// 	console.log('内容高度--'+ ($(window).scrollTop()+el.docHeight));
+		// 	if ( ($(window).scrollTop()+el.docHeight+5)> $(document).height() ) {
 				
-				if (settings.onLoading) {
-					settings.onLoading(params);
-					console.log('加载');
-				}
-				el.trigger('onLoading',params);
-			}
-			console.log('内容高度=='+$(document).height());
-		});
+		// 		if (settings.onLoading) {
+		// 			settings.onLoading(params);
+		// 			console.log('加载');
+		// 		}
+		// 		el.trigger('onLoading',params);
+		// 	}
+		// 	console.log('内容高度=='+$(document).height());
+		// });
 
 		el.bind('touchend' , function(e){
 			//debugger
@@ -186,6 +186,7 @@
 	$.fn.pushToRefresh.defaults={
 		maxheight:200,
 		height:0,
+		animateHTML:'',
 		onInit:function(){console.log('===='+1);},
 		onDrag:function(){console.log('===='+2);},
 		onLoading:function(){console.log('===='+3);},

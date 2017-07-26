@@ -11,7 +11,7 @@
 			el:'#app',
 			data:{
 				male:d.items[4].data.data,
-				screen_width:windowWidth
+				screen_width:windowWidth	
 			},
 			methods:{
 				exit:function(){
